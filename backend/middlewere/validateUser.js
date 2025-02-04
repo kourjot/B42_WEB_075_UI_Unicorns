@@ -1,0 +1,17 @@
+const validateUser = (req, res, next) => {
+    const { username, email, password } = req.body;
+
+    if (!username || !email || !password) {
+        return res.status(400).json({ msg: "All fields are required" });
+    }
+
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(email)) {
+        return res.status(400).json({ msg: "Invalid email format" });
+    }
+
+
+    next(); 
+};
+
+export{validateUser}
