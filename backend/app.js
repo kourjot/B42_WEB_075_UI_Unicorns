@@ -10,8 +10,7 @@ import { googleRouter} from "./googleAuth/oAuthRouter.js";
 const app=express()
 const PORT= process.env.PORT || 3110;
 
-// import  {passport}  from "./googleAuth/auth.js"
-// import { googleRouter} from "./googleAuth/oAuthRouter.js";
+
 
 app.use(express.json())
 app.use(cors())
@@ -21,7 +20,7 @@ app.use(userRouter)
 app.use("/oauth",googleRouter)
 
 
-// app.use("/oauth",googleRouter)
+
 
 app.use("/login",(req,res)=>{
     res.json({msg:"user login successful with oAuth credentials"})
