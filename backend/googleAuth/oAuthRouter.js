@@ -16,7 +16,6 @@ googleRouter.get(
     failureRedirect: "/login",
     session: false,
   }),
-
   async (req, res) => {
     console.log("Google callback triggered");
     let { email, name: username } = req.user._json;
@@ -30,7 +29,7 @@ googleRouter.get(
         id: existUser._id,
       };
     } else {
-      const hash=await argon2.hash(password)
+      const hash = await argon2.hash("Password123");
               const newUser=new User({
                   username,
                   email,
