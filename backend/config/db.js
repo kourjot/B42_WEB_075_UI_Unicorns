@@ -3,7 +3,7 @@ import "dotenv/config"
 const connection=async()=>{
     try{
       await connect(process.env.MONGO_URL)
-      console.log("Connected to databas 🚀")
+      console.log("Connected to database! 🚀")
     }catch(err){
        console.log("Error connecting to databas: " + err)
     } 
