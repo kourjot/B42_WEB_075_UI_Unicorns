@@ -23,7 +23,7 @@ app.use("/oauth",googleRouter)
 
 
 app.use("/login",(req,res)=>{
-    res.json({msg:"user login successful with oAuth credentials"})
+    res.json({msg:"user login successful with oAuth credentials !!!!!"})
 })
 
 app.get("/",(req,res,next)=>{
