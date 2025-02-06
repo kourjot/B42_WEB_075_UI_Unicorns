@@ -10,8 +10,8 @@ const profileData=async(req,res)=>{
     }
     try{
       const decoded=jwt.verify(token,process.env.JWT_SECRET_KEY)
-       const {username,email,userId}=decoded
-        const users=await User.findOne({username,email})
+       const {username,email}=decoded
+        const users=await User.findOne({email})
          if(!users){
          return res.status(401).send("user not found")
          }
@@ -31,7 +31,7 @@ const profileData=async(req,res)=>{
             createdAt:new Date()
         })  
         await newProfile.save()
-        res.status(200).send(newProfile)
+        res.status(200).send("Profile created")
 
     }catch(err){
         return res.status(500).send({ error: "Internal server error", details: err.message });
