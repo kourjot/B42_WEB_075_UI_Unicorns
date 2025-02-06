@@ -7,6 +7,7 @@ import { profileData } from "../controller/profileController.js";
 import { getProfile } from "../controller/profileController.js";
 import { getBuddies } from "../controller/matchBuddiesController.js";
 import {tokenVerify} from "../middlewere/tokenverify.js"
+import {getWorkoutDataForDay } from "../controller/particulardayWorkout.js"
 const userRouter =Router()
 userRouter.post("/signin",validatesigIn,signIn)
 userRouter.post("/login",validateLogin,login)
