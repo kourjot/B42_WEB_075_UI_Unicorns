@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
@@ -55,21 +55,4 @@ const App = () => {
 };
 
 export default App;
-=======
-import React from 'react'
-import Footer from './Components/Common/Footer'
-import About from './Pages/About'
-import ProfileForm from './Pages/ProfileForm'
 
-const App = () => {
-  return (
-    <div>
-      <About/>
-      
-      <Footer/>
-    </div>
-  )
-}
-
-export default App
->>>>>>> 88285fd2bf5a6003882b740984c7020071ddbb42
