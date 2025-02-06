@@ -3,13 +3,13 @@ import { User } from "../model/userModel.js"
 import {profile} from "../model/profileModel.js"
 import "dotenv/config"
 const jwtKey=process.env.JWT_SECRET_KEY
-export const profileData=async(req,res)=>{
-    const token=req.headers.authorization.split(" ")[1]
+const profileData=async(req,res)=>{
+    const token=req.headers["authorization"]
     if(!token){
         return res.status(403).send("Token is required" );
     }
     try{
-        const decoded=jwt.verify(token,jwtKey)
+        const decoded=jwt.verify(token,process.env.JWT_SECRET_KEY)
        const {username,email,userId}=decoded
         const users=await User.findOne({username,email})
          if(!users){
@@ -41,8 +41,8 @@ export const profileData=async(req,res)=>{
 
 
   
-export const getProfile=async(req,res)=>{
-    const token=req.headers.authorization.split(" ")[1]
+const getProfile=async(req,res)=>{
+    const token=req.headers["authorization"]
     if(!token){
         return res.status(403).send("token not exists")
     }
@@ -58,3 +58,4 @@ export const getProfile=async(req,res)=>{
     }
 
 }
+export {profileData,getProfile}

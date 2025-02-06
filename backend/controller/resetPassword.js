@@ -3,8 +3,9 @@ import {User } from "../model/userModel.js"
 import argon2 from "argon2"
  const resetpassword=async(req,res)=>{
     const {email,otp,newPassword}=req.body
-    
+    // console.log(email,otp,newPassword)
     const hash=await argon2.hash(newPassword)
+    // console.log(hash)
     try{
         const emailExist = await OTP.findOne({email:email})
     if(!emailExist){ 
