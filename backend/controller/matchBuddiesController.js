@@ -15,7 +15,7 @@ export const getBuddies = async (req, res) => {
         const nearbyUser = await profile.findOne({ email }); // Use findOne to get a single user profile
 
         if (!nearbyUser) {
-            return res.status(404).json({ message: "User not found" });
+            return res.status(403).json({ message: "User not found" });
         }
 
         const { city, fitnessGoals } = nearbyUser; // Extract city and fitnessGoals from the user profile

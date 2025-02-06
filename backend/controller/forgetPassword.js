@@ -4,7 +4,7 @@ import "dotenv/config"
 import nodemailer from "nodemailer"
 import crypto from "node:crypto"
 const gmail=process.env.GMAIL_NODEMAILER
-const pass=process.env.GMAIL_NODEMAILER_PAS
+const pass=process.env.GMAIL_NODEMAILER_PASS
 const transporter=nodemailer.createTransport({
     host:"smtp.gmail.com",
     auth:{
@@ -14,12 +14,15 @@ const transporter=nodemailer.createTransport({
 })
 const forgotPassword=async(req,res)=>{
     const {email}=req.body
+  
     try{
         const emailExists=await User.findOne({email})
+        
         if(!emailExists){
             return res.status(201).send("user not found")
         }
         const otpExists=await OTP.find({email})
+       
         if(otpExists){
             await OTP.deleteOne({email})
         }
@@ -36,10 +39,10 @@ const forgotPassword=async(req,res)=>{
             html:`<h1>Reset Password <h1> ${ot}`
         })
        transporter.sendMail(mailOptions)
-       console.log(newOtp)
+    //    console.log(newOtp)
        res.json({newOtp})
     } catch(err){
-        console.log(err);
+        console.log("err from server",err);
         res.status(201).send("error in forgot password")
     }
 
