@@ -1,55 +1,60 @@
-import { Profile } from "../model/profileModel.js";
-import mongoose from 'mongoose'
-
-const createProfile = async (req, res) => {
-    try {
-      const { userId, name, location, preferredWorkouts, fitnessGoals, weeklyTarget } = req.body;
-      const profile = new Profile({
-        user:userId,
-        name,
-        location,
-        preferredWorkouts,
-        fitnessGoals,
-        weeklyTarget,
-      });
-      await profile.save();
-      res.status(201).json({msg:"Profile created successfully!"});
-    } catch (error) {
-      res.status(500).json({ error: error.message });
+import jwt from "jsonwebtoken"
+import { User } from "../model/userModel.js"
+import {profile} from "../model/profileModel.js"
+import "dotenv/config"
+const jwtKey=process.env.JWT_SECRET_KEY
+export const profileData=async(req,res)=>{
+    const token=req.headers.authorization.split(" ")[1]
+    if(!token){
+        return res.status(403).send("Token is required" );
     }
-};
+    try{
+        const decoded=jwt.verify(token,jwtKey)
+       const {username,email,userId}=decoded
+        const users=await User.findOne({username,email})
+         if(!users){
+         return res.status(404).send("user not found")
+         }
+         const profileExists=await profile.findOne({username,email})
+         if(profileExists){
+            return res.status(201).send("profile already exits")
+         }
+        const {name,city,preferredWorkout,fitnessGoals}=req.body
+        const newProfile=new profile({
+            userId:users._id,
+            username:users.username,
+            email:users.email,
+            name:name,
+            city:city,
+            preferredWorkout:preferredWorkout,
+            fitnessGoals:fitnessGoals,
+            createdAt:new Date()
+        })  
+        await newProfile.save()
+        res.status(200).send(newProfile)
 
-const fetchProfile = async (req, res) => {
-    try {
-        const userId = new mongoose.Types.ObjectId(req.body.userId);
-        const profile = await Profile.findOne({ user: userId }).select("name location.coordinates preferredWorkouts fitnessGoals"); // Populate user email
+    }catch(err){
+        return res.status(404).send({ error: "Internal server error", details: err.message });
 
-        if (!profile) {
-            return res.status(404).json({ message: "Profile not found" });
-        }
-        res.status(200).json(profile);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-}
-
-const updateProfile = async (req, res) => {
-    try {
-        const userId = new mongoose.Types.ObjectId(req.body.userId);
-        const updatedProfile = await Profile.findOneAndUpdate(
-            { user: userId },  // Find profile by userId
-            { $set: req.body },           // Update with request body
-            { new: true, runValidators: true }  // Return updated doc & validate
-        );
-
-        if (!updatedProfile) {
-            return res.status(404).json({ message: "Profile not found" });
-        }
-
-        res.status(200).json({ message: "Profile updated successfully", updatedProfile });
-    } catch (error) {
-        res.status(500).json({ msg:"hello" });
     }
 }
 
-export {createProfile,fetchProfile,updateProfile}
+
+  
+export const getProfile=async(req,res)=>{
+    const token=req.headers.authorization.split(" ")[1]
+    if(!token){
+        return res.status(403).send("token not exists")
+    }
+    try{
+        const decodedToken= jwt.verify(token,jwtKey)
+        const {username,email}=decodedToken
+        const dataProfile=await profile.findOne({username,email})
+        res.status(201).json({dataProfile})
+
+    }catch(err){
+    res.status(404).json({ error: "Error in token", details: err.message });
+
+    }
+
+}

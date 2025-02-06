@@ -6,10 +6,9 @@ import cors from "cors"
 
 import  {passport}  from "./googleAuth/auth.js"
 import { googleRouter} from "./googleAuth/oAuthRouter.js";
+
 const app=express()
 const PORT= process.env.PORT || 3110;
-
-import { profileRouter } from "./router/profileRouter.js"
 
 
 
@@ -20,8 +19,6 @@ app.use(userRouter)
 
 app.use("/oauth",googleRouter)
 
-
-app.use(profileRouter)
 
 
 
