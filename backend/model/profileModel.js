@@ -1,39 +1,28 @@
-import mongoose from 'mongoose'
+import {Schema,model} from "mongoose"
 
-const profileSchema = new mongoose.Schema({
-    user: {
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "User",  // Reference to the User model
+const profileSchema=new Schema({
+    name:{type:String,required:true},
+   city:{type:String,required:true},
+    userId: {
+        type: Schema.Types.ObjectId,
+        ref: "user", 
         required: true,
+      },
+      email:{type:String,required:true},
+      username:{type:String,required:true},
+    preferredWorkout:{
+        type:String,
+        required:true,
+        enum:["running","weightlifting","yoga","cardio"]
     },
-    name: {
-        type: String,
-        required: true,
+    fitnessGoals:{type:String,required:true,
+        enum:["weight gain","weight lose","bulking","flexibility","muscle build"]
     },
-    location: {
-        type: {
-            type: String,
-            enum: ["Point"], // GeoJSON format for geospatial queries
-            required: true,
-        },
-        coordinates: {
-            type: [Number], // [longitude, latitude]
-            required: true,
-        },
-    },
-    preferredWorkouts: {
-        type: [String], // Example: ["Yoga", "Running", "Weightlifting"]
-        required: true,
-    },
-    fitnessGoals: {
-        type: String, // Example: "Weight Loss"
-        required: true,
-    },
-}, { timestamps: true });
+    createdAt:{
+        type:Date,default:Date.now
+    }
+})
 
-// Create a geospatial index on location
-profileSchema.index({ location: "2dsphere" });
+const profile=model("profile",profileSchema)
 
-const Profile = mongoose.model("Profile", profileSchema);
-
-export {Profile}
+export {profile}
