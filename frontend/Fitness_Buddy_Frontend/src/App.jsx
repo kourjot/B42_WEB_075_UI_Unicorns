@@ -7,7 +7,7 @@ const App = () => {
   return (
     <div>
       <About/>
-      
+      <ProfileForm/>
       <Footer/>
     </div>
   )
