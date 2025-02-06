@@ -49,7 +49,8 @@ googleRouter.get(
     });
 
     // Redirect the user to your frontend URL
-    res.redirect(`http://localhost:3110/login?token=${token}`);
+  
+    res.redirect(`https://b42-web-075-api-unicorns-1.onrender.com/signin?token=${token}`);
 
   }
 );
