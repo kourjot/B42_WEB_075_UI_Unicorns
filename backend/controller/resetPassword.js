@@ -9,7 +9,7 @@ import argon2 from "argon2"
     try{
         const emailExist = await OTP.findOne({email:email})
     if(!emailExist){ 
-        return res.status(400).send("user not exist")
+        return res.status(404).send("user not exist")
     }
     if(emailExist.otp==otp){
        await User.updateOne({email},{$set:{password:hash}})
@@ -21,7 +21,7 @@ import argon2 from "argon2"
    
     }catch(err){
         console.log("error in reset Password",err);
-        res.status(201).send("error in reset Password",err)
+        res.status(500).send("error in reset Password",err)
     }
 
 }

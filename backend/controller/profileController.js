@@ -6,18 +6,18 @@ const jwtKey=process.env.JWT_SECRET_KEY
 const profileData=async(req,res)=>{
     const token=req.headers["authorization"]
     if(!token){
-        return res.status(403).send("Token is required" );
+        return res.status(401).send("Token is required" );
     }
     try{
       const decoded=jwt.verify(token,process.env.JWT_SECRET_KEY)
        const {username,email}=decoded
         const users=await User.findOne({email})
          if(!users){
-         return res.status(401).send("user not found")
+         return res.status(404).send("user not found")
          }
          const profileExists=await profile.findOne({username,email})
          if(profileExists){
-            return res.status(201).send("profile already exits")
+            return res.status(409).send("profile already exits")
          }
         const {name,city,preferredWorkout,fitnessGoals}=req.body
         const newProfile=new profile({
@@ -31,8 +31,7 @@ const profileData=async(req,res)=>{
             createdAt:new Date()
         })  
         await newProfile.save()
-        res.status(200).send("Profile created")
-
+        res.status(201).send("Profile Successfully Created!")
     }catch(err){
         return res.status(500).send({ error: "Internal server error", details: err.message });
 
@@ -44,16 +43,16 @@ const profileData=async(req,res)=>{
 const getProfile=async(req,res)=>{
     const token=req.headers["authorization"]
     if(!token){
-        return res.status(403).send("token not exists")
+        return res.status(401).send("token not exists")
     }
     try{
         const decodedToken= jwt.verify(token,jwtKey)
         const {username,email}=decodedToken
         const dataProfile=await profile.findOne({username,email})
-        res.status(201).json({dataProfile})
+        res.status(200).json({dataProfile})
 
     }catch(err){
-    res.status(404).json({ error: "Error in token", details: err.message });
+    res.status(500).json({ error: "Error in token", details: err.message });
 
     }
 

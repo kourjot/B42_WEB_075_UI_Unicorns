@@ -19,7 +19,7 @@ const forgotPassword=async(req,res)=>{
         const emailExists=await User.findOne({email})
         
         if(!emailExists){
-            return res.status(201).send("user not found")
+            return res.status(404).send("user not found")
         }
         const otpExists=await OTP.find({email})
        
@@ -43,7 +43,7 @@ const forgotPassword=async(req,res)=>{
        res.json({newOtp})
     } catch(err){
         console.log("err from server",err);
-        res.status(201).send("error in forgot password")
+        res.status(500).send("error in forgot password")
     }
 
 

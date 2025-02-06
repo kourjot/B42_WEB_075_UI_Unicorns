@@ -15,7 +15,7 @@ export const getBuddies = async (req, res) => {
         const nearbyUser = await profile.findOne({ email }); // Use findOne to get a single user profile
 
         if (!nearbyUser) {
-            return res.status(403).json({ message: "User not found" });
+            return res.status(404).json({ message: "User not found" });
         }
 
         const { city, fitnessGoals } = nearbyUser; // Extract city and fitnessGoals from the user profile
@@ -34,6 +34,6 @@ export const getBuddies = async (req, res) => {
         return res.status(200).json(getBuddies); // Send the list of buddies
     } catch (err) {
         console.log("Error:", err);
-        return res.status(400).json({ message: "Error in getting buddies", err });
+        return res.status(500).json({ message: "Error in getting buddies", err });
     }
 };
