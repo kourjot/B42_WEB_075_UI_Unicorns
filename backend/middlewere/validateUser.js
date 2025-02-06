@@ -10,7 +10,7 @@ const validatesigIn = (req, res, next) => {
     }
     next(); 
 };
-const validateLogin = (req, res, next) => {
+const validateLogin = async(req, res, next) => {
     const { email, password } = req.body;
 
     if (!email || !password) {
@@ -21,7 +21,6 @@ const validateLogin = (req, res, next) => {
     if (!emailRegex.test(email)) {
         return res.status(400).json({ msg: "Invalid email format" });
     }
-
     next();
 };
 
