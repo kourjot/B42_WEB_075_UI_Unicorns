@@ -31,7 +31,7 @@ const profileData=async(req,res)=>{
             createdAt:new Date()
         })  
         await newProfile.save()
-        res.status(200).send(newProfile)
+        res.status(200).send("Profile Successfully Created!")
 
     }catch(err){
         return res.status(404).send({ error: "Internal server error", details: err.message });
