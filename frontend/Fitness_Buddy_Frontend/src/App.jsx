@@ -1,13 +1,15 @@
+import React from 'react'
+import Footer from './Components/Common/Footer'
+import About from './Pages/About'
+import ProfileForm from './Pages/ProfileForm'
 
-import './App.css'
-
-function App() {
-  
-
+const App = () => {
   return (
-    <>
+    <div>
+      <About/>
       
-    </>
+      <Footer/>
+    </div>
   )
 }
 
