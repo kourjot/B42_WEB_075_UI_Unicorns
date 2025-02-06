@@ -9,11 +9,11 @@ const profileData=async(req,res)=>{
         return res.status(403).send("Token is required" );
     }
     try{
-        const decoded=jwt.verify(token,process.env.JWT_SECRET_KEY)
-       const {username,email,userId}=decoded
-        const users=await User.findOne({username,email})
+      const decoded=jwt.verify(token,process.env.JWT_SECRET_KEY)
+       const {username,email}=decoded
+        const users=await User.findOne({email})
          if(!users){
-         return res.status(404).send("user not found")
+         return res.status(401).send("user not found")
          }
          const profileExists=await profile.findOne({username,email})
          if(profileExists){
@@ -32,9 +32,8 @@ const profileData=async(req,res)=>{
         })  
         await newProfile.save()
         res.status(200).send("Profile Successfully Created!")
-
     }catch(err){
-        return res.status(404).send({ error: "Internal server error", details: err.message });
+        return res.status(500).send({ error: "Internal server error", details: err.message });
 
     }
 }
