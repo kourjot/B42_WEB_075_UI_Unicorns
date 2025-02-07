@@ -6,6 +6,7 @@ import cors from "cors"
 
 import  {passport}  from "./googleAuth/auth.js"
 import { googleRouter} from "./googleAuth/oAuthRouter.js";
+import { facebookRouter } from "./facebookAuth/oAuthRouter.js"
 
 const app=express()
 const PORT= process.env.PORT || 3110;
@@ -18,7 +19,7 @@ app.use(cors())
 app.use(userRouter)
 
 app.use("/oauth",googleRouter)
-
+app.use("/auth",facebookRouter)
 
 
 
