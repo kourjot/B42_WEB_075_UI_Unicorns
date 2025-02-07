@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
@@ -9,6 +8,11 @@ import SignIn from './Pages/SignIn';
 import Home from './Pages/Home';
 import Navbar from './Components/Common/Navbar';
 import Dashboard from './Components/Common/Dashboard';
+import Footer from './Components/Common/Footer';
+import About from './Pages/About';
+import ProfileForm from './Pages/ProfileForm';
+import ForgotPassword from './Pages/ForgotPassword';
+import ResetPassword from './Pages/ResetPassword';
 
 // Create a separate component for the root route
 const RootRoute = () => {
@@ -27,13 +31,36 @@ const RootRoute = () => {
 
 const App = () => {
   return (
-    <div>
-      <About/>
-      
-      <Footer/>
-    </div>
-  )
-}
+    <>
+    {/* <Navbar/> */}
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route path='/createprofile' element={<ProfileForm/>}/>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signin" element={<SignIn />} />
+          <Route path='/dashboard' element={<Dashboard/>}/>
+          <Route path='/footer' element={<Footer/>}/>
+          <Route path='/about' element={<About/>}/>
+          <Route path="/forgot-password" element={<ForgotPassword/>} />
+          <Route path="/reset-password" element={<ResetPassword/>} />
+          <Route
+            path="/home"
+            element={
+             
+                <Home />
+              
+            }
+          />
+          {/* Root route using the new component */}
+          <Route path="/" element={<RootRoute />} />
+          {/* Catch all route for undefined paths */}
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </Router>
+    </AuthProvider>
+    </>
+  );
+};
 
 export default App;
-

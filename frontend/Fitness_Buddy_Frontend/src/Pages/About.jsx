@@ -5,10 +5,22 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import Navbar from "../Components/Common/Navbar";
+import { useNavigate } from "react-router";
+import Footer from "../Components/Common/Footer";
+
+
 
 const About = () => {
+  const navigate = useNavigate()
+
+  const handelClick = () =>{
+    navigate("/createprofile")
+}
   return (
-    <div className="bg-gray-100 text-gray-900">
+    <>
+    <Navbar/>
+    <div className="bg-gray-100 text-gray-900 mt-20" >
       {/* Hero Section */}
       <div className="relative">
         <img
@@ -134,11 +146,13 @@ const About = () => {
       <div className="container mx-auto px-6 py-12 text-center">
         <h2 className="text-3xl font-semibold">Join FitnessBuddy Today!</h2>
         <p className="mt-2 text-lg">Find your fitness partner and start achieving your goals together.</p>
-        <button className="mt-4 bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700">
+        <button className="mt-4 bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700" onClick={handelClick}>
           Get Started
         </button>
       </div>
     </div>
+    <Footer/>
+    </>
   );
 };
 

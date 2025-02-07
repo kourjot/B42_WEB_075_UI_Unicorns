@@ -25,7 +25,7 @@ const Navbar = () => {
           <NavLink to="/process" className="hover:text-blue-400 transition duration-300">
             Process
           </NavLink>
-          <NavLink to="/profile" className="hover:text-blue-400 transition duration-300">
+          <NavLink to="/createprofile" className="hover:text-blue-400 transition duration-300">
             Profile
           </NavLink>
         </div>

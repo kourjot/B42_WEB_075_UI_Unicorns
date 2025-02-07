@@ -1,6 +1,8 @@
 import React from 'react';
 import { useState } from 'react';
 import { ChevronLeft, ChevronRight, Activity, Calendar, Users, Trophy, ArrowRight } from 'lucide-react';
+import Navbar from '../Components/Common/Navbar';
+import Footer from '../Components/Common/Footer';
 
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
@@ -32,6 +34,8 @@ const Home = () => {
   };
 
   return (
+    <>
+    <Navbar/>
     <div className="min-h-screen bg-gray-50">
      
 
@@ -161,6 +165,8 @@ const Home = () => {
 
       
     </div>
+    <Footer/>
+    </>
   );
 };
 
