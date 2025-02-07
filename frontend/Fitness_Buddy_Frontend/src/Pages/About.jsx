@@ -6,10 +6,14 @@ import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import Navbar from "../Components/Common/Navbar";
+<<<<<<< HEAD
 import { useNavigate } from "react-router";
 import Footer from "../Components/Common/Footer";
 
 
+=======
+import Footer from "../Components/Common/Footer";
+>>>>>>> da45a969b6230b166fe0598786dc060fe6f35e46
 
 const About = () => {
   const navigate = useNavigate()
@@ -20,7 +24,11 @@ const About = () => {
   return (
     <>
     <Navbar/>
+<<<<<<< HEAD
     <div className="bg-gray-100 text-gray-900 mt-20" >
+=======
+    <div className="bg-gray-100 text-gray-900">
+>>>>>>> da45a969b6230b166fe0598786dc060fe6f35e46
       {/* Hero Section */}
       <div className="relative">
         <img

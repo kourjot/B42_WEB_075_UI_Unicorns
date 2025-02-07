@@ -1,13 +1,17 @@
 
 import React from 'react'
 import Home from '../../Pages/Home'
+import Footer from './Footer'
 import Navbar from './Navbar'
-// import Navbar from './Components/Common/Navbar';
+
+
 const Dashboard = () => {
   return (
    <>
    <Navbar/>
    <Home/>
+   <Footer/>
+   
  </>
   )
 }

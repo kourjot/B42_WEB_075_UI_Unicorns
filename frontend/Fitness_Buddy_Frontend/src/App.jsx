@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext';
@@ -13,6 +14,29 @@ import About from './Pages/About';
 import ProfileForm from './Pages/ProfileForm';
 import ForgotPassword from './Pages/ForgotPassword';
 import ResetPassword from './Pages/ResetPassword';
+=======
+import React from "react";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
+
+import { useAuth } from "./context/AuthContext";
+import Login from "./Pages/Login";
+import SignIn from "./Pages/SignIn";
+import Home from "./Pages/Home";
+
+// import Navbar from './Navbar'
+import Dashboard from "./Components/Common/Dashboard";
+import Footer from "./Components/Common/Footer";
+import About from "./Pages/About";
+import BmiCalculator from "./Pages/BmiCalculator";
+import WorkoutUpdate from "./Pages/WorkoutUpdate";
+import ProgressReport from "./Pages/ProgressReport";
+>>>>>>> da45a969b6230b166fe0598786dc060fe6f35e46
 
 // Create a separate component for the root route
 const RootRoute = () => {
@@ -36,6 +60,7 @@ const App = () => {
     <AuthProvider>
       <Router>
         <Routes>
+<<<<<<< HEAD
           <Route path='/createprofile' element={<ProfileForm/>}/>
           <Route path="/login" element={<Login />} />
           <Route path="/signin" element={<SignIn />} />
@@ -44,6 +69,17 @@ const App = () => {
           <Route path='/about' element={<About/>}/>
           <Route path="/forgot-password" element={<ForgotPassword/>} />
           <Route path="/reset-password" element={<ResetPassword/>} />
+=======
+          <Route path="/login" element={<Login />} />
+          <Route path="/signin" element={<SignIn />} />
+          <Route path='/dashboard' element={<Dashboard/>}/>
+          <Route path='/bmi' element={<BmiCalculator/>}/>
+          <Route path='/workoutupdate' element={<WorkoutUpdate/>}/>
+          <Route path='/progressreport' element={<ProgressReport/>}/>
+          <Route path='/footer' element={<Footer/>}/>
+          <Route path='/about' element={<About/>}/>
+          
+>>>>>>> da45a969b6230b166fe0598786dc060fe6f35e46
           <Route
             path="/home"
             element={
