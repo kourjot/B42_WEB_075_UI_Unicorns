@@ -8,7 +8,7 @@ import "dotenv/config"
         const verification= jwt.verify(token,process.env.JWT_SECRET_KEY)
         // console.log("token verified");
         if(!verification){
-            return res.status(201).send("token verification error")
+            return res.status(401).send("token verification error")
         }
         next()
     }catch(err){

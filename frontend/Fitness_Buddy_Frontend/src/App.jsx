@@ -38,25 +38,28 @@ const RootRoute = () => {
 const App = () => {
   return (
     <>
-      <AuthProvider>
-        <Router>
-          <Routes>
-            <Route path="/login" element={<Login />} />
-            <Route path="/signin" element={<SignIn />} />
-            <Route path="/dashboard" element={<Dashboard />} />
-            <Route path="/footer" element={<Footer />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/bmi" element={<BmiCalculator />} />
-            <Route path="/workoutupdate" element={<WorkoutUpdate />} />
-            <Route path="/progressreport" element={<ProgressReport />} />
-            <Route path="/home" element={<Home />} />
-            {/* Root route using the new component */}
-            <Route path="/" element={<RootRoute />} />
-            {/* Catch all route for undefined paths */}
-            <Route path="*" element={<Navigate to="/" replace />} />
-          </Routes>
-        </Router>
-      </AuthProvider>
+    {/* <Navbar/> */}
+    <AuthProvider>
+      <Router>
+        <Routes>
+          <Route path="/login" element={<Login />} />
+          <Route path="/signin" element={<SignIn />} />
+          <Route path='/dashboard' element={<Dashboard/>}/>
+          <Route
+            path="/home"
+            element={
+             
+                <Home />
+              
+            }
+          />
+          {/* Root route using the new component */}
+          <Route path="/" element={<RootRoute />} />
+          {/* Catch all route for undefined paths */}
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </Router>
+    </AuthProvider>
     </>
   );
 };

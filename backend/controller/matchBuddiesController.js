@@ -34,6 +34,6 @@ export const getBuddies = async (req, res) => {
         return res.status(200).json(getBuddies); // Send the list of buddies
     } catch (err) {
         console.log("Error:", err);
-        return res.status(400).json({ message: "Error in getting buddies", err });
+        return res.status(500).json({ message: "Error in getting buddies", err });
     }
 };
