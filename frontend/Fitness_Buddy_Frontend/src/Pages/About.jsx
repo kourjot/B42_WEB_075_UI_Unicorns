@@ -5,9 +5,13 @@ import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import Navbar from "../Components/Common/Navbar";
+import Footer from "../Components/Common/Footer";
 
 const About = () => {
   return (
+    <>
+    <Navbar/>
     <div className="bg-gray-100 text-gray-900">
       {/* Hero Section */}
       <div className="relative">
@@ -139,6 +143,8 @@ const About = () => {
         </button>
       </div>
     </div>
+    <Footer/>
+    </>
   );
 };
 
