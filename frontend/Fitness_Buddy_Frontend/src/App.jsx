@@ -6,12 +6,12 @@ import {
   Navigate,
 } from "react-router-dom";
 import { AuthProvider } from "./context/AuthContext";
-import { ProtectedRoute } from "./Components/Common/ProtectedRoute";
+
 import { useAuth } from "./context/AuthContext";
 import Login from "./Pages/Login";
 import SignIn from "./Pages/SignIn";
 import Home from "./Pages/Home";
-import Navbar from "./Components/Common/Navbar";
+
 // import Navbar from './Navbar'
 import Dashboard from "./Components/Common/Dashboard";
 import Footer from "./Components/Common/Footer";
@@ -45,6 +45,12 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path='/dashboard' element={<Dashboard/>}/>
+          <Route path='/bmi' element={<BmiCalculator/>}/>
+          <Route path='/workoutupdate' element={<WorkoutUpdate/>}/>
+          <Route path='/progressreport' element={<ProgressReport/>}/>
+          <Route path='/footer' element={<Footer/>}/>
+          <Route path='/about' element={<About/>}/>
+          
           <Route
             path="/home"
             element={
