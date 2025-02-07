@@ -29,7 +29,7 @@ const Login = () => {
       if (success) {
         console.log("✅ Login successful!");
         alert("Login successful! 🎉");
-        navigate("/dashboard");
+        navigate("/home");
       } else {
         console.error("❌ Login failed:", error);
         setMessage(error);
