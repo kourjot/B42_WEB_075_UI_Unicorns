@@ -3,7 +3,7 @@ import { User } from "../model/userModel.js"
 import {profile} from "../model/profileModel.js"
 import "dotenv/config"
 const jwtKey=process.env.JWT_SECRET_KEY
-const profileData=async(req,res)=>{
+const createprofile=async(req,res)=>{
     const token=req.headers["authorization"]
     if(!token){
         return res.status(401).send("Token is required" );
@@ -16,7 +16,7 @@ const profileData=async(req,res)=>{
          return res.status(404).send("user not found")
          }
          const profileExists=await profile.findOne({username,email})
-         if(profileExists){
+         if(!profileExists){
             return res.status(409).send("profile already exits")
          }
         const {name,city,preferredWorkout,fitnessGoals}=req.body
@@ -38,7 +38,33 @@ const profileData=async(req,res)=>{
     }
 }
 
-
+const updateprofile=async (req,res)=>{
+    const token =req.headers["authorization"]
+    if(!token){
+        return res.status(401).send("Token is required")
+    }
+    try{
+       const decoded=jwt.verify(token,process.env.JWT_SECRET_KEY)
+       const {username,email}=decoded 
+       const findprofile=await User.findOne({email})
+       if(!findprofile){
+           return res.status(404).send("User not found")
+       }
+       const profileExists=await profile.findOne({username,email})
+       if(!profileExists){
+           return res.status(404).send("Profile not found")
+       }
+       const { name, city, preferredWorkout, fitnessGoals } = req.body;
+       if(name)profileExists.name=name
+       if(city) profileExists.city=city
+       if(preferredWorkout)profileExists.preferredWorkout=preferredWorkout
+       if(fitnessGoals)profileExists.fitnessGoals=fitnessGoals
+       await profileExists.save()
+       return res.status(200).send("Profile updated successfully!")
+    }catch(err){
+        return res.status(500).send({ error: "Internal server error", details: err.message });
+    }
+}
   
 const getProfile=async(req,res)=>{
     const token=req.headers["authorization"]
@@ -57,4 +83,4 @@ const getProfile=async(req,res)=>{
     }
 
 }
-export {profileData,getProfile}
+export {createprofile,getProfile,updateprofile}
