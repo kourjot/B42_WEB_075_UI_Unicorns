@@ -65,11 +65,11 @@ const Navbar = () => {
             <NavLink to="/progressreport" className={navLinkStyles}>
               Your Progress
             </NavLink>
-            <NavLink to="/buddymatching" className={navLinkStyles}>
-              Buddy Matching
-            </NavLink>
             <NavLink to="/profile" className={navLinkStyles}>
               Profile
+            </NavLink>
+            <NavLink to="/showprofile" className={navLinkStyles}>
+               Show Profile
             </NavLink>
           </div>
 
@@ -120,6 +120,7 @@ const Navbar = () => {
           >
             Check BMI
           </NavLink>
+
           <NavLink
             to="/workoutupdate"
             className={mobileNavLinkStyles}

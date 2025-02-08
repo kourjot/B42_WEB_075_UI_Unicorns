@@ -1,23 +1,24 @@
 import {Schema,model} from "mongoose"
 
 const profileSchema=new Schema({
-   name:{type:String,required:true,unique:true},
-   city:{type:String,required:true},
+   name:{type:String,unique:true},
+   city:{type:String},
     userId: {
         type: Schema.Types.ObjectId,
         ref: "user", 
         required: true,
       },
-      email:{type:String,required:true},
-      username:{type:String,required:true},
+      email:{type:String},
+      username:{type:String},
     preferredWorkout:{
         type:String,
-        required:true,
+        // required:true,
         enum:["running","weightlifting","yoga","cardio"]
     },
-    fitnessGoals:{type:String,required:true,
+    fitnessGoals:{type:String,
         enum:["weight gain","weight lose","bulking","flexibility","muscle build"]
     },
+    photo:{type:String},
     createdAt:{
         type:Date,default:Date.now
     }

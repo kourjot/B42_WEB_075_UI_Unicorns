@@ -1,3 +1,5 @@
+
+
 import React from "react";
 import { useState } from "react";
 import {
@@ -11,13 +13,13 @@ import {
 } from "lucide-react";
 import Navbar from "../Components/Common/Navbar";
 import Footer from "../Components/Common/Footer";
-import simage1 from "../assets/media/simage1.jpg";
-import simage2 from "../assets/media/simage2.jpg";
-import simage3 from "../assets/media/simage3.jpg";
 
 const Home = () => {
+  const navigate =  useNavigate()
+
   const [currentSlide, setCurrentSlide] = useState(0);
 
+  
   const slides = [
     {
       image: simage1,
@@ -65,7 +67,7 @@ const Home = () => {
                 <div className="text-center text-white">
                   <h1 className="text-5xl font-bold mb-4">{slide.title}</h1>
                   <p className="text-xl mb-8">{slide.subtitle}</p>
-                  <button className="bg-blue-600 text-white px-8 py-3 rounded-md hover:bg-blue-700">
+                  <button className="bg-blue-600 text-white px-8 py-3 rounded-md hover:bg-blue-700" onClick={() => navigate("/createprofile")}>
                     Get Started
                   </button>
                 </div>
