@@ -53,8 +53,11 @@ const Navbar = () => {
             <NavLink to="/progressreport" className={navLinkStyles}>
               Your Progress
             </NavLink>
-            <NavLink to="/profile" className={navLinkStyles}>
+            <NavLink to="/createprofile" className={navLinkStyles}>
               Profile
+            </NavLink>
+            <NavLink to="/showprofile" className={navLinkStyles}>
+               Show Profile
             </NavLink>
           </div>
 
@@ -104,9 +107,7 @@ const Navbar = () => {
           >
             Check BMI
           </NavLink>
-<<<<<<< HEAD
-          <NavLink to="/createprofile" className="hover:text-blue-400 transition duration-300">
-=======
+
           <NavLink
             to="/workoutupdate"
             className={mobileNavLinkStyles}
@@ -126,7 +127,6 @@ const Navbar = () => {
             className={mobileNavLinkStyles}
             onClick={() => setIsOpen(false)}
           >
->>>>>>> da45a969b6230b166fe0598786dc060fe6f35e46
             Profile
           </NavLink>
           
