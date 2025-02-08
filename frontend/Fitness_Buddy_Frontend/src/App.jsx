@@ -19,7 +19,9 @@ import About from "./Pages/About";
 import BmiCalculator from "./Pages/BmiCalculator";
 import WorkoutUpdate from "./Pages/WorkoutUpdate";
 import ProgressReport from "./Pages/ProgressReport";
-
+import LandingPage from "./Pages/LandingPage";
+import { BrowserRouter } from "react-router-dom";
+import BuddyMatching from "./Pages/BuddyMatching";
 // Create a separate component for the root route
 const RootRoute = () => {
   const { user, loading } = useAuth();
@@ -32,19 +34,28 @@ const RootRoute = () => {
     );
   }
 
-  return <Navigate to={user ? "/home" : "/login"} replace />;
+  return user ? <Navigate to="/home" replace /> : <Navigate to="/landingpage" replace />;
+
 };
 
 const App = () => {
   return (
     <>
     {/* <Navbar/> */}
+    
     <AuthProvider>
-      <Router>
+    <BrowserRouter>
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path='/dashboard' element={<Dashboard/>}/>
+          <Route path='/bmi' element={<BmiCalculator/>}/>
+          <Route path='/workoutupdate' element={<WorkoutUpdate/>}/>
+          <Route path='/progressreport' element={<ProgressReport/>}/>
+          <Route path='/footer' element={<Footer/>}/>
+          <Route path='/about' element={<About/>}/>
+          <Route path='/landingpage' element={<LandingPage/>}/>
+          <Route path='/buddymatching' element={<BuddyMatching/>}/>
           <Route
             path="/home"
             element={
@@ -58,8 +69,9 @@ const App = () => {
           {/* Catch all route for undefined paths */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
-      </Router>
+        </BrowserRouter>
     </AuthProvider>
+    
     </>
   );
 };

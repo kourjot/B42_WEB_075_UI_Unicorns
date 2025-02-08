@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import loginbanner from "../assets/media/loginbanner.jpg";
-
+import logo from "../assets/media/logo.png";
 const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [message, setMessage] = useState("");
@@ -45,6 +45,14 @@ const Login = () => {
       <div className="flex w-full max-w-4xl rounded-lg bg-white shadow-lg">
         {/* Left Side - Form */}
         <div className="w-1/2 p-10">
+          <div className="flex justify-center items-center">
+            <img
+              src={logo}
+              alt="logo"
+              className="h-12 w-auto object-contain hover:opacity-90 transition-all duration-300 
+    hover:scale-105 mb-2"
+            />
+          </div>
           <h1 className="text-3xl font-bold text-black">Welcome Back!</h1>
           <p className="mt-2 text-gray-600">Log in to continue</p>
 
@@ -83,22 +91,13 @@ const Login = () => {
             </button>
           </form>
 
-          {message && <p className="mt-2 text-center text-red-500">{message}</p>}
+          {message && (
+            <p className="mt-2 text-center text-red-500">{message}</p>
+          )}
 
-          <div className="mt-4 flex items-center justify-center">
-            <span className="w-full border-t"></span>
-            <span className="mx-3 text-gray-400">Or</span>
-            <span className="w-full border-t"></span>
-          </div>
+          
 
-          <button className="mt-4 flex w-full items-center justify-center rounded-md border border-gray-300 px-4 py-2 hover:bg-gray-100">
-            <img
-              src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png"
-              alt="Google Logo"
-              className="mr-2 h-5 w-5"
-            />
-            Log in with Google
-          </button>
+          
 
           <p className="mt-4 text-center text-gray-500">
             Don't have an account?{" "}

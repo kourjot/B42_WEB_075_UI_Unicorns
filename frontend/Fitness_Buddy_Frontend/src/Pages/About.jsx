@@ -140,6 +140,7 @@ const About = () => {
         <p className="mt-2 text-lg">Find your fitness partner and start achieving your goals together.</p>
         <button className="mt-4 bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700">
           Get Started
+          <h1>example</h1>
         </button>
       </div>
     </div>

@@ -2,13 +2,20 @@ import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import { useNavigate } from "react-router-dom";
 import { Menu, X } from 'lucide-react';
-
+import logo from "../../assets/media/logo.png";
 const Navbar = () => {
   const navigate = useNavigate();
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
+  };
+
+  const handleLogout = () => {
+    console.log("🚪 Logging out user"); 
+    localStorage.removeItem("user");
+    localStorage.removeItem("token");
+    navigate("/landingpage"); 
   };
 
   // Active link style function
@@ -32,9 +39,14 @@ const Navbar = () => {
       <div className="container mx-auto px-4 sm:px-6 py-4">
         <div className="flex justify-between items-center">
           {/* Brand Name */}
-          <div className="text-xl sm:text-2xl font-bold tracking-wide text-blue-400">
-            Fitness Buddy
-          </div>
+          <div className="flex justify-center items-center">
+                      <img
+                        src={logo}
+                        alt="logo"
+                        className="h-12 w-auto object-contain hover:opacity-90 transition-all duration-300 
+              hover:scale-105 mb-2"
+                      />
+                    </div>
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-4 lg:space-x-6">
@@ -53,6 +65,9 @@ const Navbar = () => {
             <NavLink to="/progressreport" className={navLinkStyles}>
               Your Progress
             </NavLink>
+            <NavLink to="/buddymatching" className={navLinkStyles}>
+              Buddy Matching
+            </NavLink>
             <NavLink to="/profile" className={navLinkStyles}>
               Profile
             </NavLink>
@@ -61,7 +76,8 @@ const Navbar = () => {
           {/* Logout Button - Hidden on Mobile */}
           <div className="hidden md:block">
             <button
-              onClick={() => navigate("/login")}
+              onClick={handleLogout}
+              
               className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition duration-300"
             >
               Logout

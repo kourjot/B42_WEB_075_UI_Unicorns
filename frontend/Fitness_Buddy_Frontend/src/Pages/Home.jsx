@@ -11,23 +11,26 @@ import {
 } from "lucide-react";
 import Navbar from "../Components/Common/Navbar";
 import Footer from "../Components/Common/Footer";
+import simage1 from "../assets/media/simage1.jpg";
+import simage2 from "../assets/media/simage2.jpg";
+import simage3 from "../assets/media/simage3.jpg";
 
 const Home = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   const slides = [
     {
-      image: "/api/placeholder/1200/600",
+      image: simage1,
       title: "Transform Your Life",
       subtitle: "Start your fitness journey today",
     },
     {
-      image: "/api/placeholder/1200/600",
+      image: simage2,
       title: "Expert Trainers",
       subtitle: "Get personalized guidance",
     },
     {
-      image: "/api/placeholder/1200/600",
+      image: simage3,
       title: "State-of-the-art Facilities",
       subtitle: "Train with the best equipment",
     },
@@ -58,7 +61,7 @@ const Home = () => {
                 alt={slide.title}
                 className="w-full h-[600px] object-cover"
               />
-              <div className="absolute inset-0 bg-black bg-opacity-40 flex items-center justify-center">
+              <div className="absolute inset-0  bg-opacity-40 flex items-center justify-center">
                 <div className="text-center text-white">
                   <h1 className="text-5xl font-bold mb-4">{slide.title}</h1>
                   <p className="text-xl mb-8">{slide.subtitle}</p>
