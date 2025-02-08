@@ -3,7 +3,7 @@ import {signIn,login} from "../controller/userController.js"
 import  {forgotPassword} from "../controller/forgetPassword.js"
 import {resetpassword} from "../controller/resetPassword.js"
 import {validatesigIn,validateLogin} from "../middlewere/validateUser.js"
-import {createprofile,getProfile,updateprofile}from "../controller/profileController.js";
+import {upload,createprofile,getProfile,updateprofile}from "../controller/profileController.js";
 import { getBuddies } from "../controller/matchBuddiesController.js";
 import {tokenVerify} from "../middlewere/tokenverify.js"
 import {getWorkoutDataForDay } from "../controller/particulardayWorkout.js"
@@ -16,7 +16,7 @@ userRouter.post("/forgotPassword",forgotPassword)
 userRouter.post("/resetPassword", resetpassword)
 userRouter.use(tokenVerify)
 userRouter.get("/getworkoutdatafor-per-day",getWorkoutDataForDay)
-userRouter.post("/createprofile",createprofile)
+userRouter.post("/createprofile",upload.single("profile"),createprofile)
 userRouter.get("/getProfile",getProfile)
 userRouter.put("/updateProfile",updateprofile)
 userRouter.get("/getBuddies",getBuddies)

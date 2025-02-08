@@ -2,6 +2,27 @@ import jwt from "jsonwebtoken"
 import { User } from "../model/userModel.js"
 import {profile} from "../model/profileModel.js"
 import "dotenv/config"
+import multer from "multer";
+import V2 from "cloudinary"
+import fs from "fs"
+import path from "path";
+import { fileURLToPath } from "url";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename,"uploads/"); 
+const storage=multer.diskStorage({
+    destination:function(req,file,cb){
+        cb(null,__dirname)
+    },
+    filename:function(req,file,cb){
+        cb(null,Date.now()+file.originalname)
+    }
+})
+export const upload=multer({storage:storage})
+V2.config({
+    cloud_name: "dauds0p8p",
+    api_key: "215473884174485",
+    api_secret: "XjUxO4DgjxUVS0dXPTVdABHkHjw",
+});
 const jwtKey=process.env.JWT_SECRET_KEY
 const createprofile=async(req,res)=>{
     const token=req.headers["authorization"]
@@ -11,6 +32,16 @@ const createprofile=async(req,res)=>{
     try{
       const decoded=jwt.verify(token,process.env.JWT_SECRET_KEY)
        const {username,email}=decoded
+       let x;
+        if(req.file){
+        x = await V2.uploader.upload(req.file.path);
+        
+        fs.unlink(req.file.path, async (err) => {
+            if (err) {
+                return res.status(404).json({ message: "Error deleting the file from the server" });
+            }
+        })
+        }
         const users=await User.findOne({email})
          if(!users){
          return res.status(404).send("user not found")
@@ -19,6 +50,9 @@ const createprofile=async(req,res)=>{
          if(!profileExists){
             return res.status(409).send("profile already exits")
          }
+         console.log(x)
+         if(x){
+           
         const {name,city,preferredWorkout,fitnessGoals}=req.body
         const newProfile=new profile({
             userId:users._id,
@@ -28,10 +62,26 @@ const createprofile=async(req,res)=>{
             city:city,
             preferredWorkout:preferredWorkout,
             fitnessGoals:fitnessGoals,
+            photo:x.secure_url,
             createdAt:new Date()
         })  
         await newProfile.save()
         res.status(201).send("Profile Successfully Created!")
+         }else{
+            const {name,city,preferredWorkout,fitnessGoals}=req.body
+            const newProfile=new profile({
+                userId:users._id,
+                username:users.username,
+                email:users.email,
+                name:name,
+                city:city,
+                preferredWorkout:preferredWorkout,
+                fitnessGoals:fitnessGoals,
+                createdAt:new Date()
+            })  
+            await newProfile.save()
+            res.status(201).send("Profile Successfully Created!")
+         }
     }catch(err){
         return res.status(500).send({ error: "Internal server error", details: err.message });
 
