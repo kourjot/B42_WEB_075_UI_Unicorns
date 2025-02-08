@@ -21,7 +21,6 @@ const ForgotPassword = () => {
       );
 
       if (response.ok) {
-        // ✅ Navigate to Reset Password Page with email as state
         navigate("/reset-password", { state: { email } });
       } else {
         alert("Failed to send OTP. Try again.");
@@ -34,26 +33,34 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
+    <div
+      className="min-h-screen flex items-center justify-center bg-cover bg-center p-4"
+      style={{
+        backgroundImage:
+          "url('https://img.freepik.com/free-photo/darkroom-concrete-floor-with-foggy-effect-stage-background-product_84443-7819.jpg')",
+      }}
+    >
+      <div
+        className="bg-white/80 backdrop-blur-lg p-8 rounded-lg shadow-lg max-w-md w-full"
+      >
         <h2 className="text-2xl font-semibold text-center text-gray-900 mb-4">
           Forgot Password
         </h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="text-gray-700 block mb-1">Email:</label>
+            <label className="text-gray-900 block mb-1">Email:</label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full p-2 rounded-md border border-gray-400 bg-transparent text-black placeholder-gray-600 focus:ring focus:ring-blue-300 outline-none"
+              className="w-full p-2 rounded-md border border-white bg-transparent text-black placeholder-gray-700 focus:ring focus:ring-blue-300 outline-none backdrop-blur-lg"
               placeholder="Enter your email"
             />
           </div>
           <button
             type="submit"
-            className="w-full bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 rounded-md transition duration-300"
+            className="w-full bg-transparent text-black border border-white py-2 rounded-md transition duration-300 cursor-pointer hover:bg-white/10 backdrop-blur-lg"
             disabled={loading}
           >
             {loading ? "Sending..." : "Send OTP"}

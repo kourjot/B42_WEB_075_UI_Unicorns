@@ -16,7 +16,6 @@ const Login = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
 
-    // 🚀 Input Validation
     if (!formData.email || !formData.password) {
       console.error("❌ All fields are required!");
       return alert("Email and Password are required!");
@@ -29,7 +28,7 @@ const Login = () => {
       if (success) {
         console.log("✅ Login successful!");
         alert("Login successful! 🎉");
-        navigate("/home");
+        navigate("/dashboard");
       } else {
         console.error("❌ Login failed:", error);
         setMessage(error);
@@ -48,46 +47,46 @@ const Login = () => {
           <h1 className="text-3xl font-bold text-black">Welcome Back!</h1>
           <p className="mt-2 text-gray-600">Log in to continue</p>
 
-          <form className="mt-6" onSubmit={handleSubmit}>
-            <div>
-              <label className="block text-gray-700">Email</label>
-              <input
-                type="email"
-                name="email"
-                placeholder="Enter your email"
-                className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none"
-                value={formData.email}
-                onChange={handleChange}
-                required
-              />
-            </div>
+        <form className="mt-6" onSubmit={handleSubmit}>
+          <div>
+            <label className="block text-white">Email</label>
+            <input
+              type="email"
+              name="email"
+              placeholder="Enter your email"
+              className="mt-1 w-full rounded-md border border-white/50 px-3 py-2 bg-transparent text-white placeholder-gray-300 focus:border-blue-400 focus:outline-none"
+              value={formData.email}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-            <div className="mt-4">
-              <label className="block text-gray-700">Password</label>
-              <input
-                type="password"
-                name="password"
-                placeholder="Enter your password"
-                className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none"
-                value={formData.password}
-                onChange={handleChange}
-                required
-              />
-            </div>
+          <div className="mt-4">
+            <label className="block text-white">Password</label>
+            <input
+              type="password"
+              name="password"
+              placeholder="Enter your password"
+              className="mt-1 w-full rounded-md border border-white/50 px-3 py-2 bg-transparent text-white placeholder-gray-300 focus:border-blue-400 focus:outline-none"
+              value={formData.password}
+              onChange={handleChange}
+              required
+            />
+          </div>
 
-            <button
-              type="submit"
-              className="mt-4 w-full rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
-            >
-              Log In
-            </button>
-            <p className="text-center mt-2">
-  <a href="/forgot-password" className="text-blue-600 hover:underline">
-    Forgot Password?
-  </a>
-</p>
+          <button
+            type="submit"
+            className="mt-4 w-full rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
+          >
+            Log In
+          </button>
 
-          </form>
+          <p className="text-center mt-2">
+            <Link to="/forgot-password" className="text-blue-400 hover:underline">
+              Forgot Password?
+            </Link>
+          </p>
+        </form>
 
           {message && <p className="mt-2 text-center text-red-500">{message}</p>}
 
