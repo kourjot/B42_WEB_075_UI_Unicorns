@@ -1,3 +1,10 @@
+
+import React from 'react';
+import { useState } from 'react';
+import { ChevronLeft, ChevronRight, Activity, Calendar, Users, Trophy, ArrowRight } from 'lucide-react';
+import Navbar from '../Components/Common/Navbar';
+import Footer from '../Components/Common/Footer';
+
 import React from "react";
 import { useState } from "react";
 import {

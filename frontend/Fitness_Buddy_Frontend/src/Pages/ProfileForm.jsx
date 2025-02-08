@@ -1,6 +1,10 @@
 import React, { useState } from "react";
+import { useNavigate } from "react-router";
+import Navbar from "../Components/Common/Navbar";
+import Footer from "../Components/Common/Footer";
 
 const ProfileForm = () => {
+  const navigate = useNavigate()
   const [profile, setProfile] = useState({
     name: "",
     location: "",
@@ -23,9 +27,9 @@ const ProfileForm = () => {
       fitnessGoals: profile.fitnessGoals,
     };
 
-    const token = localStorage.getItem("jwtToken");
+    const token = localStorage.getItem("token");
 
-    fetch("https://b42-web-075-ui-unicorns-1.onrender.com/profile", {
+    fetch("https://b42-web-075-ui-unicorns.onrender.com/createprofile", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -43,9 +47,13 @@ const ProfileForm = () => {
       .catch((error) => {
         console.error("Network error:", error);
       });
+      // navigate("/home")
+
   };
 
   return (
+    <>
+    <Navbar/>
     <div
       className="min-h-screen flex items-center justify-center bg-cover bg-center p-4"
       style={{
@@ -152,6 +160,8 @@ const ProfileForm = () => {
         </form>
       </div>
     </div>
+    <Footer/>
+    </>
   );
 };
 
