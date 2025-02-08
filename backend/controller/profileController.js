@@ -127,8 +127,9 @@ const getProfile=async(req,res)=>{
     try{
         const decodedToken= jwt.verify(token,jwtKey)
         const {username,email}=decodedToken
-        const dataProfile=await profile.findOne({username,email})
-        res.status(200).json({dataProfile})
+        const dataProfile=await profile.findOne({email})
+        console.log(dataProfile)
+        res.status(200).send(dataProfile)
 
     }catch(err){
     res.status(500).json({ error: "Error in token", details: err.message });
