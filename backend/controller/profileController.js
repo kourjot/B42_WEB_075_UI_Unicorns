@@ -19,9 +19,9 @@ const storage=multer.diskStorage({
 })
 export const upload=multer({storage:storage})
 V2.config({
-    cloud_name: process.env.Cloud_NAME,
-    api_key: process.env.API_KEY,
-    api_secret: process.env.API_SECRET,
+    cloud_name: process.env.CLOUD_NAME,
+    api_key: process.env.CLOUD_API_KEY,
+    api_secret: process.env.CLOUD_API_SECRET,
 });
 const jwtKey=process.env.JWT_SECRET_KEY
 const createprofile=async(req,res)=>{
