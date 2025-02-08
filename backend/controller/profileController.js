@@ -19,9 +19,9 @@ const storage=multer.diskStorage({
 })
 export const upload=multer({storage:storage})
 V2.config({
-    cloud_name: "dauds0p8p",
-    api_key: "215473884174485",
-    api_secret: "XjUxO4DgjxUVS0dXPTVdABHkHjw",
+    cloud_name: process.env.Cloud_NAME,
+    api_key: process.env.API_KEY,
+    api_secret: process.env.API_SECRET,
 });
 const jwtKey=process.env.JWT_SECRET_KEY
 const createprofile=async(req,res)=>{
@@ -46,13 +46,9 @@ const createprofile=async(req,res)=>{
          if(!users){
          return res.status(404).send("user not found")
          }
-         const profileExists=await profile.findOne({username,email})
-         if(!profileExists){
-            return res.status(409).send("profile already exits")
-         }
-         console.log(x)
-         if(x){
-           
+         const profileExists=await profile.findOne({email})
+         console.log(profileExists)
+         if(x){ 
         const {name,city,preferredWorkout,fitnessGoals}=req.body
         const newProfile=new profile({
             userId:users._id,
@@ -67,20 +63,6 @@ const createprofile=async(req,res)=>{
         })  
         await newProfile.save()
         res.status(201).send("Profile Successfully Created!")
-         }else{
-            const {name,city,preferredWorkout,fitnessGoals}=req.body
-            const newProfile=new profile({
-                userId:users._id,
-                username:users.username,
-                email:users.email,
-                name:name,
-                city:city,
-                preferredWorkout:preferredWorkout,
-                fitnessGoals:fitnessGoals,
-                createdAt:new Date()
-            })  
-            await newProfile.save()
-            res.status(201).send("Profile Successfully Created!")
          }
     }catch(err){
         return res.status(500).send({ error: "Internal server error", details: err.message });
@@ -97,18 +79,39 @@ const updateprofile=async (req,res)=>{
        const decoded=jwt.verify(token,process.env.JWT_SECRET_KEY)
        const {username,email}=decoded 
        const findprofile=await User.findOne({email})
+      
        if(!findprofile){
            return res.status(404).send("User not found")
        }
        const profileExists=await profile.findOne({username,email})
+       
        if(!profileExists){
            return res.status(404).send("Profile not found")
        }
-       const { name, city, preferredWorkout, fitnessGoals } = req.body;
+       const { name, city, preferredWorkout, fitnessGoals ,photo} = req.body;
        if(name)profileExists.name=name
        if(city) profileExists.city=city
        if(preferredWorkout)profileExists.preferredWorkout=preferredWorkout
        if(fitnessGoals)profileExists.fitnessGoals=fitnessGoals
+       let newImage;
+       if(req.file){
+        const x = await V2.uploader.upload(req.file.path);
+       
+        newImage=x.secure_url
+    
+        if(profileExists.photo){
+            const publicId = profileExists.photo.split("/").pop().split(".")[0];
+                await V2.uploader.destroy
+                (publicId);
+        } 
+        profileExists.photo=newImage
+        fs.unlink(req.file.path,(err)=>{
+            if (err) {
+                return res.status(404).json({ message: "Error deleting the file from the server" });
+            }
+        })
+       }
+       if(photo)profileExists.photo=newImage
        await profileExists.save()
        return res.status(200).send("Profile updated successfully!")
     }catch(err){
