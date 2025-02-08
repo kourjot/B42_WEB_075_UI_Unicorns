@@ -46,9 +46,10 @@ const createprofile=async(req,res)=>{
          if(!users){
          return res.status(404).send("user not found")
          }
-         const profileExists=await profile.findOne({email})
-         console.log(profileExists)
-         if(x){ 
+        const profileExists=await profile.findOne({email})
+        console.log(profileExists)
+        if(x){
+
         const {name,city,preferredWorkout,fitnessGoals}=req.body
         const newProfile=new profile({
             userId:users._id,
@@ -63,7 +64,21 @@ const createprofile=async(req,res)=>{
         })  
         await newProfile.save()
         res.status(201).send("Profile Successfully Created!")
-         }
+    }else{
+        const {name,city,preferredWorkout,fitnessGoals}=req.body
+        const newProfile=new profile({
+            userId:users._id,
+            username:users.username,
+            email:users.email,
+            name:name,
+            city:city,
+            preferredWorkout:preferredWorkout,
+            fitnessGoals:fitnessGoals,
+            createdAt:new Date()
+        })  
+        await newProfile.save()
+        res.status(201).send("Profile Successfully Created!")
+    }
     }catch(err){
         return res.status(500).send({ error: "Internal server error", details: err.message });
 
