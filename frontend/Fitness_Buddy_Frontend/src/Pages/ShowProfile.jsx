@@ -37,7 +37,7 @@ const ShowProfile = () => {
         className="min-h-screen flex items-center justify-center bg-cover bg-center p-4"
         style={{
           backgroundImage:
-            "url('https://img.freepik.com/free-photo/darkroom-concrete-floor-with-foggy-effect-stage-background-product_84443-7819.jpg')",
+            "url('')",
         }}
       >
         <div className="bg-white/80 backdrop-blur-lg p-6 rounded-lg shadow-lg w-full max-w-md">

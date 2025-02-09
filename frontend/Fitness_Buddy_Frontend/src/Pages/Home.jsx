@@ -13,10 +13,7 @@ import {
 } from "lucide-react";
 import Navbar from "../Components/Common/Navbar";
 import Footer from "../Components/Common/Footer";
-import { useNavigate } from "react-router";
-import simage1 from "../assets/media/simage1.jpg";
-import simage2 from "../assets/media/simage2.jpg";
-import simage3 from "../assets/media/simage3.jpg";
+
 const Home = () => {
   const navigate =  useNavigate()
 
@@ -234,7 +231,6 @@ const Home = () => {
         </div>
       </div>
     </div>
-    <Footer/>
     </>
   );
 };
