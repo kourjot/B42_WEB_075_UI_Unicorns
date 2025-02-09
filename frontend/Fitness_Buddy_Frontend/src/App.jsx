@@ -17,8 +17,8 @@ import ResetPassword from "./Pages/ResetPassword";
 import BmiCalculator from "./Pages/BmiCalculator";
 import WorkoutUpdate from "./Pages/WorkoutUpdate";
 import ProgressReport from "./Pages/ProgressReport";
-import ShowProfile from "./Pages/ShowProfile";
 
+// Create a separate component for the root route
 const RootRoute = () => {
   const { user, loading } = useAuth();
 
@@ -30,35 +30,37 @@ const RootRoute = () => {
     );
   }
 
-  return <Navigate to={user ? "/home" : "/login"} replace />;
+  return user ? <Navigate to="/home" replace /> : <Navigate to="/landingpage" replace />;
+
 };
 
 const App = () => {
   return (
+    <>
+    {/* <Navbar/> */}
     <AuthProvider>
       <Router>
-        <Navbar /> {/* Placed Navbar outside Routes for global usage */}
         <Routes>
           <Route path="/" element={<RootRoute />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signin" element={<SignIn />} />
-          <Route path="/dashboard" element={<Dashboard />} />
-          <Route path="/about" element={<About />} />
-          <Route path="/createprofile" element={<ProfileForm />} />
-          <Route path="/showprofile" element={<ShowProfile />} />
-          <Route path="/forgot-password" element={<ForgotPassword />} />
-          <Route path="/reset-password" element={<ResetPassword />} />
-          <Route path="/bmi" element={<BmiCalculator />} />
-          <Route path="/workoutupdate" element={<WorkoutUpdate />} />
-          <Route path="/progressreport" element={<ProgressReport />} />
-          <Route path="/home" element={<Home />} />
-
-          {/* Catch all unknown routes */}
+          <Route path='/dashboard' element={<Dashboard/>}/>
+          <Route
+            path="/home"
+            element={
+             
+                <Home />
+              
+            }
+          />
+          {/* Root route using the new component */}
+          <Route path="/" element={<RootRoute />} />
+          {/* Catch all route for undefined paths */}
           <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
-        <Footer /> {/* Placed Footer outside Routes for global usage */}
       </Router>
     </AuthProvider>
+    </>
   );
 };
 

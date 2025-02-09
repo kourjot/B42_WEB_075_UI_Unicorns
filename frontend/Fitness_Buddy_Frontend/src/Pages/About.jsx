@@ -86,20 +86,17 @@ const About = () => {
           </Swiper>
         </div>
 
-        {/* Call to Action */}
-        <div className="container mx-auto px-6 py-12 text-center">
-          <h2 className="text-3xl font-semibold">Join FitnessBuddy Today!</h2>
-          <p className="mt-2 text-lg">Find your fitness partner and start achieving your goals together.</p>
-          <button
-            className="mt-4 bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700"
-            onClick={handleClick}
-          >
-            Get Started
-          </button>
-        </div>
+      {/* Call to Action */}
+      <div className="container mx-auto px-6 py-12 text-center">
+        <h2 className="text-3xl font-semibold">Join FitnessBuddy Today!</h2>
+        <p className="mt-2 text-lg">Find your fitness partner and start achieving your goals together.</p>
+        <button className="mt-4 bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700">
+          Get Started
+        </button>
       </div>
-      
     </div>
+    <Footer/>
+    </>
   );
 };
 

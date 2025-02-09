@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import loginbanner from "../assets/media/loginbanner.jpg";
 
 const SignIn = () => {
   const [formData, setFormData] = useState({ username: "", email: "", password: "" });
@@ -34,16 +35,12 @@ const SignIn = () => {
   };
 
   return (
-    <div
-      className="flex min-h-screen items-center justify-center bg-cover bg-center"
-      style={{
-        backgroundImage:
-          "url('https://e0.pxfuel.com/wallpapers/521/132/desktop-wallpaper-fitness-and-background-gym-black.jpg')",
-      }}
-    >
-      <div className="bg-transparent backdrop-blur-md p-10 rounded-lg shadow-lg max-w-md w-full border border-white/30">
-        <h1 className="text-3xl font-bold text-white text-center">Create an Account</h1>
-        <p className="mt-2 text-center text-gray-300">Sign up to get started</p>
+    <div className="flex min-h-screen items-center justify-center bg-gray-100">
+      <div className="flex w-full max-w-4xl rounded-lg bg-white shadow-lg">
+        {/* Left Side - Form */}
+        <div className="w-1/2 p-10">
+          <h1 className="text-3xl font-bold text-black">Create an Account</h1>
+          <p className="mt-2 text-gray-600">Sign up to get started</p>
 
         <form className="mt-6" onSubmit={handleSubmit}>
           <div>
@@ -95,20 +92,20 @@ const SignIn = () => {
 
         {message && <p className="mt-2 text-center text-red-400">{message}</p>}
 
-        <div className="mt-4 flex items-center justify-center">
-          <span className="w-full border-t border-white/20"></span>
-          <span className="mx-3 text-gray-400">Or</span>
-          <span className="w-full border-t border-white/20"></span>
-        </div>
+          <div className="mt-4 flex items-center justify-center">
+            <span className="w-full border-t"></span>
+            <span className="mx-3 text-gray-400">Or </span>
+            <span className="w-full border-t"></span>
+          </div>
 
-        <button className="mt-4 flex w-full items-center justify-center rounded-md border border-white/50 px-4 py-2 hover:bg-white/10 text-white">
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png"
-            alt="Google Logo"
-            className="mr-2 h-5 w-5"
-          />
-          Sign up with Google
-        </button>
+          <button className="mt-4 flex w-full items-center justify-center rounded-md border border-gray-300 px-4 py-2 hover:bg-gray-100">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png"
+              alt="Google Logo"
+              className="mr-2 h-5 w-5"
+            />
+            Sign up with Google
+          </button>
 
         <p className="mt-4 text-center text-gray-300">
           Already have an account? {" "}

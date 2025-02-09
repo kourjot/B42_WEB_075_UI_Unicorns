@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
+import loginbanner from "../assets/media/loginbanner.jpg";
 
 const Login = () => {
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -39,18 +40,12 @@ const Login = () => {
   };
 
   return (
-    <div
-      className="flex min-h-screen items-center justify-center bg-cover bg-center"
-      style={{
-        backgroundImage:
-          "url('https://e0.pxfuel.com/wallpapers/521/132/desktop-wallpaper-fitness-and-background-gym-black.jpg')",
-      }}
-    >
-      <div className="bg-transparent backdrop-blur-md p-10 rounded-lg shadow-lg max-w-md w-full border border-white/30">
-        <h1 className="text-3xl font-bold text-white text-center">
-          Welcome Back!
-        </h1>
-        <p className="mt-2 text-center text-gray-300">Log in to continue</p>
+    <div className="flex min-h-screen items-center justify-center bg-gray-100">
+      <div className="flex w-full max-w-4xl rounded-lg bg-white shadow-lg">
+        {/* Left Side - Form */}
+        <div className="w-1/2 p-10">
+          <h1 className="text-3xl font-bold text-black">Welcome Back!</h1>
+          <p className="mt-2 text-gray-600">Log in to continue</p>
 
         <form className="mt-6" onSubmit={handleSubmit}>
           <div>
@@ -93,22 +88,42 @@ const Login = () => {
           </p>
         </form>
 
-        {message && <p className="mt-2 text-center text-red-400">{message}</p>}
+          {message && <p className="mt-2 text-center text-red-500">{message}</p>}
 
-        <div className="mt-4 flex items-center justify-center">
-          <span className="w-full border-t border-white/20"></span>
-          <span className="mx-3 text-gray-400">Or</span>
-          <span className="w-full border-t border-white/20"></span>
+          <div className="mt-4 flex items-center justify-center">
+            <span className="w-full border-t"></span>
+            <span className="mx-3 text-gray-400">Or</span>
+            <span className="w-full border-t"></span>
+          </div>
+
+          <button className="mt-4 flex w-full items-center justify-center rounded-md border border-gray-300 px-4 py-2 hover:bg-gray-100">
+            <img
+              src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/53/Google_%22G%22_Logo.svg/512px-Google_%22G%22_Logo.svg.png"
+              alt="Google Logo"
+              className="mr-2 h-5 w-5"
+            />
+            Log in with Google
+          </button>
+
+          <p className="mt-4 text-center text-gray-500">
+            Don't have an account?{" "}
+            <Link to="/signin" className="text-blue-600 hover:underline">
+              Sign Up
+            </Link>
+          </p>
         </div>
 
-        
-
-        <p className="mt-4 text-center text-gray-300">
-          Don't have an account?{" "}
-          <Link to="/signin" className="text-blue-400 hover:underline">
-            Sign Up
-          </Link>
-        </p>
+        {/* Right Side - Illustration */}
+        <div className="w-1/2 bg-indigo-100 p-10 flex flex-col items-center justify-center">
+          <img
+            src={loginbanner}
+            alt="Illustration"
+            className="w-full h-full object-cover"
+          />
+          <p className="mt-4 text-center text-gray-700">
+            Join Tasky today and manage your tasks efficiently!
+          </p>
+        </div>
       </div>
     </div>
   );
