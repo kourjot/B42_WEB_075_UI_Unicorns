@@ -6,6 +6,7 @@ import "swiper/css/pagination";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
 import Navbar from "../Components/Common/Navbar";
 import { useNavigate } from "react-router-dom";
+import Footer from "../Components/Common/Footer";
 
 const About = () => {
   const navigate = useNavigate();
@@ -15,6 +16,7 @@ const About = () => {
   };
 
   return (
+    
     <div>
       <Navbar />
 
@@ -96,7 +98,7 @@ const About = () => {
       </div>
     </div>
     <Footer/>
-    </>
+    </div>
   );
 };
 

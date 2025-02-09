@@ -1,22 +1,26 @@
 import React from "react";
-import { BrowserRouter as Router, Routes, Route, Navigate } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
+import { ProtectedRoute } from "./Components/Common/ProtectedRoute";
 import { useAuth } from "./context/AuthContext";
-import { AuthProvider } from "./context/AuthContext"; // Ensure this is correctly imported
-
-import { ProtectedRoute } from "./Components/Common/ProtectedRoute"; // If needed
-import Navbar from "./Components/Common/Navbar";
-import Footer from "./Components/Common/Footer";
-import Dashboard from "./Components/Common/Dashboard";
-import Home from "./Pages/Home";
 import Login from "./Pages/Login";
 import SignIn from "./Pages/SignIn";
+import Home from "./Pages/Home";
+import Navbar from "./Components/Common/Navbar";
+// import Navbar from './Navbar'
+import Dashboard from "./Components/Common/Dashboard";
+import Footer from "./Components/Common/Footer";
 import About from "./Pages/About";
-import ProfileForm from "./Pages/ProfileForm";
-import ForgotPassword from "./Pages/ForgotPassword";
-import ResetPassword from "./Pages/ResetPassword";
 import BmiCalculator from "./Pages/BmiCalculator";
 import WorkoutUpdate from "./Pages/WorkoutUpdate";
 import ProgressReport from "./Pages/ProgressReport";
+import LandingPage from "./Pages/LandingPage";
+import BuddyMatching from "./Pages/BuddyMatching";
 
 // Create a separate component for the root route
 const RootRoute = () => {
@@ -30,8 +34,7 @@ const RootRoute = () => {
     );
   }
 
-  return user ? <Navigate to="/home" replace /> : <Navigate to="/landingpage" replace />;
-
+  return <Navigate to={user ? "/home" : "/landingpage"} replace />;
 };
 
 const App = () => {
@@ -41,10 +44,16 @@ const App = () => {
     <AuthProvider>
       <Router>
         <Routes>
-          <Route path="/" element={<RootRoute />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signin" element={<SignIn />} />
           <Route path='/dashboard' element={<Dashboard/>}/>
+          <Route path='/bmi' element={<BmiCalculator/>}/>
+          <Route path='/workoutupdate' element={<WorkoutUpdate/>}/>
+          <Route path='/progressreport' element={<ProgressReport/>}/>
+          <Route path='/footer' element={<Footer/>}/>
+          <Route path='/about' element={<About/>}/>
+          <Route path='/landingpage' element={<LandingPage/>}/>
+          <Route path='/buddymatching' element={<BuddyMatching/>}/>
           <Route
             path="/home"
             element={
