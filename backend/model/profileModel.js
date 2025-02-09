@@ -1,7 +1,7 @@
 import {Schema,model} from "mongoose"
 
 const profileSchema=new Schema({
-   name:{type:String,},
+   name:{type:String},
    city:{type:String},
     userId: {
         type: Schema.Types.ObjectId,
@@ -18,7 +18,7 @@ const profileSchema=new Schema({
     fitnessGoals:{type:String,
         enum:["weight gain","weight lose","bulking","flexibility","muscle build"]
     },
-    photo:{type:String},
+
     createdAt:{
         type:Date,default:Date.now
     }
