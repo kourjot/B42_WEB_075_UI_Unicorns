@@ -15,7 +15,7 @@ const findGym = async (req, res) => {
             return res.status(401).json({ error: "Invalid token" });
         }
 
-        const { username,email } = decoded.user;
+        const { username,email } = decoded;
 
         // Find user profile based on username
         const userProfile = await profile.findOne({ email });
@@ -48,19 +48,26 @@ const addGym = async (req, res) => {
             return res.status(401).json({ error: "Invalid token" });
         }
 
-        const { name, location } = req.body;
-        if (!name || !location) {
-            return res.status(400).json({ error: "Gym name and location (city) are required!" });
+        const { name, city } = req.body;
+        if (!name || !city) {
+            return res.status(400).json({ error: "Gym name and city are required!" });
+        }
+
+        // Check if gym already exists in the given city
+        const existingGym = await Gym.findOne({ name, city });
+        if (existingGym) {
+            return res.status(400).json({ error: "Gym already added!" });
         }
 
         // Create new gym
-        const newGym = new Gym({ name, location });
+        const newGym = new Gym({ name, city });
         await newGym.save();
 
-        res.status(201).json({ message: "Gym added successfully!", gym: newGym });
+        res.status(201).json({ message: "Gym added successfully!" });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 };
+
 
 export {findGym, addGym}

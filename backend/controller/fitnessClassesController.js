@@ -15,7 +15,7 @@ const getFitnessClasses = async (req, res) => {
             return res.status(401).json({ error: "Invalid token" });
         }
 
-        const { username, email } = decoded.user;
+        const { username, email } = decoded;
 
         // Find user profile based on email
         const userProfile = await profile.findOne({ email });
@@ -48,16 +48,22 @@ const addFitnessClass = async (req, res) => {
             return res.status(401).json({ error: "Invalid token" });
         }
 
-        const { name, location, schedule, instructor } = req.body;
-        if (!name || !location || !schedule || !instructor) {
-            return res.status(400).json({ error: "Name, location (city), schedule, and instructor are required!" });
+        const { name, city, schedule, instructor } = req.body;
+        if (!name || !city || !schedule || !instructor) {
+            return res.status(400).json({ error: "Name, city, schedule, and instructor are required!" });
         }
 
+        // Check if Fitness Class already exists in the given city
+                const existingFitnessClass = await FitnessClass.findOne({ name, city, schedule, instructor });
+                if (existingFitnessClass) {
+                    return res.status(400).json({ error: "Fitness class already added!" });
+                }
+
         // Create new fitness class
-        const newClass = new FitnessClass({ name, location, schedule, instructor });
+        const newClass = new FitnessClass({ name, city, schedule, instructor });
         await newClass.save();
 
-        res.status(201).json({ message: "Fitness class added successfully!", class: newClass });
+        res.status(201).json({ message: "Fitness class added successfully!"});
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
