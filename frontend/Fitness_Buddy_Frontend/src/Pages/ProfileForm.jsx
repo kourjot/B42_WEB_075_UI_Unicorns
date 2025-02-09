@@ -1,16 +1,14 @@
 import React, { useState } from "react";
 import { useNavigate } from "react-router";
 import Navbar from "../Components/Common/Navbar";
-import Footer from "../Components/Common/Footer";
 
 const ProfileForm = () => {
   const navigate = useNavigate();
   const [profile, setProfile] = useState({
     name: "",
-    location: "",
-    preferredWorkouts: "",
+    city: "", // Changed from 'location' to match backend
+    preferredWorkout: "", // Changed from 'preferredWorkouts' to match backend
     fitnessGoals: "",
-    image: null, 
   });
 
   const handleChange = (e) => {
@@ -18,26 +16,15 @@ const ProfileForm = () => {
     setProfile((prevState) => ({ ...prevState, [name]: value }));
   };
 
-  const handleImageChange = (e) => {
-    const file = e.target.files[0];
-    if (file) {
-      setProfile((prevState) => ({ ...prevState, image: file }));
-    }
-  };
-
   const handleSubmit = async (e) => {
     e.preventDefault(); // Prevent page refresh
 
-    const formData = new FormData();
-    formData.append("name", profile.name);
-    formData.append("city", profile.location);
-    formData.append("preferredWorkout", profile.preferredWorkouts);
-    formData.append("fitnessGoals", profile.fitnessGoals);
-    if (profile.image) {
-      formData.append("image", profile.image);
-    }
-
     const token = localStorage.getItem("token");
+
+    if (!token) {
+      alert("You are not authorized. Please log in.");
+      return;
+    }
 
     try {
       const response = await fetch(
@@ -45,20 +32,25 @@ const ProfileForm = () => {
         {
           method: "POST",
           headers: {
-            Authorization: `${token}`,
+            "Content-Type": "application/json", // Ensure JSON request
+            Authorization: `${token}`, // Proper token format
           },
-          body: formData, // Using FormData
+          body: JSON.stringify(profile), // Send JSON directly
         }
       );
+
+      const data = await response.json();
 
       if (response.ok) {
         alert("Profile submitted successfully!");
         navigate("/showprofile"); // Navigate without refresh
       } else {
-        console.error("Error submitting profile:", response.status);
+        console.error("Error submitting profile:", data);
+        alert(data.error || "Something went wrong.");
       }
     } catch (error) {
-      console.error("Network error:", error);
+      // console.error("Network error:", error);
+      alert("Network error occurred. Please try again.");
     }
   };
 
@@ -69,16 +61,10 @@ const ProfileForm = () => {
         className="min-h-screen flex items-center justify-center bg-cover bg-center p-4"
         style={{
           backgroundImage:
-            "url('https://img.freepik.com/free-vector/background-line-gradient-luxury-style_483537-3308.jpg?ga=GA1.1.2144125845.1737116705&semt=ais_hybrid')",
+            "url('https://img.freepik.com/free-vector/vector-damask-seamless-pattern-background-classical-luxury-old-fashioned-damask-ornament-royal-victorian-seamless-texture-wallpapers-textile-wrapping-exquisite-floral-baroque-template_1217-738.jpg?ga=GA1.1.2144125845.1737116705&semt=ais_hybrid')",
         }}
       >
-        <div
-          className="bg-white/80 backdrop-blur-lg p-10 rounded-lg shadow-lg max-w-lg w-full bg-cover bg-center"
-          style={{
-            backgroundImage:
-              "url('https://img.freepik.com/free-photo/camera-accessories-arranged-concrete-background_23-2148038945.jpg?ga=GA1.1.2144125845.1737116705&semt=ais_hybrid')",
-          }}
-        >
+        <div className="bg-white/80 backdrop-blur-lg p-10 rounded-lg shadow-lg max-w-lg w-full bg-cover bg-center">
           <h2 className="text-2xl font-semibold text-center text-black mb-6">
             Create Your Profile
           </h2>
@@ -96,42 +82,24 @@ const ProfileForm = () => {
               />
             </div>
 
-            {/* Image Upload */}
             <div>
-              <label className="text-black block mb-1">Profile Image:</label>
-              <input
-                type="file"
-                accept="image/*"
-                onChange={handleImageChange}
-                className="w-full p-2 rounded-md border border-white bg-transparent text-black focus:ring focus:ring-blue-300 outline-none backdrop-blur-lg"
-              />
-              {profile.image && (
-                <img
-                  src={URL.createObjectURL(profile.image)}
-                  alt="Preview"
-                  className="mt-2 w-32 h-32 object-cover rounded-full border border-gray-300"
-                />
-              )}
-            </div>
-
-            <div>
-              <label className="text-black block mb-1">Location:</label>
+              <label className="text-black block mb-1">City:</label>
               <input
                 type="text"
-                name="location"
-                value={profile.location}
+                name="city"
+                value={profile.city}
                 onChange={handleChange}
                 required
                 className="w-full p-2 rounded-md border border-white bg-transparent text-black placeholder-gray-700 focus:ring focus:ring-blue-300 outline-none backdrop-blur-lg"
-                placeholder="Enter your location"
+                placeholder="Enter your city"
               />
             </div>
 
             <div>
               <label className="text-black block mb-1">Preferred Workouts:</label>
               <select
-                name="preferredWorkouts"
-                value={profile.preferredWorkouts}
+                name="preferredWorkout"
+                value={profile.preferredWorkout}
                 onChange={handleChange}
                 required
                 className="w-full p-2 rounded-md border border-white bg-transparent text-black focus:ring focus:ring-blue-300 outline-none cursor-pointer backdrop-blur-lg"
@@ -171,7 +139,6 @@ const ProfileForm = () => {
           </form>
         </div>
       </div>
-      <Footer />
     </>
   );
 };

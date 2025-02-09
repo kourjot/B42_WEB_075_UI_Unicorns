@@ -12,7 +12,6 @@ import {
   ArrowRight,
 } from "lucide-react";
 import Navbar from "../Components/Common/Navbar";
-import Footer from "../Components/Common/Footer";
 import { useNavigate } from "react-router";
 
 const Home = () => {
@@ -232,7 +231,6 @@ const Home = () => {
         </div>
       </div>
     </div>
-    <Footer/>
     </>
   );
 };
