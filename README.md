@@ -1,14 +1,14 @@
-# fitness_buddy_app
+# fitness_buddy
 
 
 
 # Project Title
-- Fit Buddy
+- Fitness Buddy
 
 ## Introduction
-# 🏋️‍♀️ FitConnect - Your Fitness Buddy Finder 🌟
+# 🏋️‍♀️ Fitness Buddy - Your Fitness Buddy Finder 🌟
 
-FitConnect is a fitness community app designed to help users achieve their fitness goals, track their progress, and connect with like-minded workout buddies. Whether you're into yoga, weightlifting, or running, FitConnect brings fitness enthusiasts together to stay motivated and achieve their goals as a team.
+Fitness Buddy is a fitness community app designed to help users achieve their fitness goals, track their progress, and connect with like-minded workout buddies. Whether you're into yoga, weightlifting, or running, Fitness Buddy brings fitness enthusiasts together to stay motivated and achieve their goals as a team.
 
 ---
 
