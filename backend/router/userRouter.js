@@ -9,8 +9,6 @@ import {tokenVerify} from "../middlewere/tokenverify.js"
 import {getWorkoutDataForDay } from "../controller/particulardayWorkout.js"
 import {weeklyProgress} from "../controller/weekWorkoutTrack.js"
 import {workoutUpdate} from "../controller/weekWorkout.js"
-import { addGym, findGym } from "../controller/gymController.js"
-import { addFitnessClass, getFitnessClasses } from "../controller/fitnessClassesController.js"
 
 const userRouter = Router()
 userRouter.post("/signin",validatesigIn,signIn)
@@ -25,8 +23,5 @@ userRouter.put("/updateProfile",updateprofile)
 userRouter.get("/getBuddies",getBuddies)
 userRouter.get("/weeklyProgress",weeklyProgress)
 userRouter.post("/workoutUpdate",workoutUpdate)
-userRouter.get("/getNearbyGyms",findGym)
-userRouter.post("/addGym",addGym)
-userRouter.get("/getFitnessClasses",getFitnessClasses)
-userRouter.post("/addFitnessClass",addFitnessClass)
+
 export {userRouter}
