@@ -40,27 +40,25 @@ const ForgotPassword = () => {
           "url('https://img.freepik.com/free-photo/darkroom-concrete-floor-with-foggy-effect-stage-background-product_84443-7819.jpg')",
       }}
     >
-      <div
-        className="bg-white/80 backdrop-blur-lg p-8 rounded-lg shadow-lg max-w-md w-full"
-      >
-        <h2 className="text-2xl font-semibold text-center text-gray-900 mb-4">
+      <div className="bg-transparent backdrop-blur-md p-8 rounded-lg shadow-lg max-w-md w-full">
+        <h2 className="text-2xl font-semibold text-center text-white mb-4">
           Forgot Password
         </h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="text-gray-900 block mb-1">Email:</label>
+            <label className="text-white block mb-1">Email:</label>
             <input
               type="email"
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="w-full p-2 rounded-md border border-white bg-transparent text-black placeholder-gray-700 focus:ring focus:ring-blue-300 outline-none backdrop-blur-lg"
+              className="w-full p-2 rounded-md border border-white bg-transparent text-white placeholder-gray-300 focus:ring focus:ring-blue-300 outline-none backdrop-blur-md"
               placeholder="Enter your email"
             />
           </div>
           <button
             type="submit"
-            className="w-full bg-transparent text-black border border-white py-2 rounded-md transition duration-300 cursor-pointer hover:bg-white/10 backdrop-blur-lg"
+            className="w-full bg-transparent text-white border border-white py-2 rounded-md transition duration-300 cursor-pointer hover:bg-blue-500 hover:border-blue-500"
             disabled={loading}
           >
             {loading ? "Sending..." : "Send OTP"}

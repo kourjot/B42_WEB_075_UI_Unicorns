@@ -15,7 +15,7 @@ export const ProtectedRoute = ({ children }) => {
 
   if (!user) {
     console.log("🚫 No user found, redirecting to login");
-    return <Navigate to="/login" state={{ from: location }} replace />;
+    return <Navigate to="/landingpage" state={{ from: location }} replace />;
   }
 
   return children;

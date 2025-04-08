@@ -23,7 +23,7 @@ const ResetPassword = () => {
 
       if (response.ok) {
         alert("Password reset successful! Redirecting to login...");
-        navigate("/login"); 
+        navigate("/login");
       } else {
         alert("Invalid OTP or error resetting password.");
       }
@@ -33,46 +33,52 @@ const ResetPassword = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gray-100">
-      <div className="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
-        <h2 className="text-2xl font-semibold text-center text-gray-900 mb-4">
+    <div
+      className="min-h-screen flex items-center justify-center bg-cover bg-center p-4"
+      style={{
+        backgroundImage:
+          "url('https://img.freepik.com/free-photo/darkroom-concrete-floor-with-foggy-effect-stage-background-product_84443-7819.jpg')",
+      }}
+    >
+      <div className="bg-transparent backdrop-blur-md p-8 rounded-lg shadow-lg max-w-md w-full">
+        <h2 className="text-2xl font-semibold text-center text-white mb-4">
           Reset Password
         </h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="text-gray-700 block mb-1">Email:</label>
+            <label className="text-white block mb-1">Email:</label>
             <input
               type="email"
               value={emailFromState}
               disabled
-              className="w-full p-2 rounded-md border border-gray-400 bg-gray-200 text-black"
+              className="w-full p-2 rounded-md border border-white bg-transparent text-white placeholder-gray-300 focus:ring focus:ring-blue-300 outline-none backdrop-blur-md"
             />
           </div>
           <div>
-            <label className="text-gray-700 block mb-1">OTP:</label>
+            <label className="text-white block mb-1">OTP:</label>
             <input
               type="text"
               value={otp}
               onChange={(e) => setOtp(e.target.value)}
               required
-              className="w-full p-2 rounded-md border border-gray-400 bg-transparent text-black placeholder-gray-600 focus:ring focus:ring-blue-300 outline-none"
+              className="w-full p-2 rounded-md border border-white bg-transparent text-white placeholder-gray-300 focus:ring focus:ring-blue-300 outline-none backdrop-blur-md"
               placeholder="Enter OTP"
             />
           </div>
           <div>
-            <label className="text-gray-700 block mb-1">New Password:</label>
+            <label className="text-white block mb-1">New Password:</label>
             <input
               type="password"
               value={newPassword}
               onChange={(e) => setNewPassword(e.target.value)}
               required
-              className="w-full p-2 rounded-md border border-gray-400 bg-transparent text-black placeholder-gray-600 focus:ring focus:ring-blue-300 outline-none"
+              className="w-full p-2 rounded-md border border-white bg-transparent text-white placeholder-gray-300 focus:ring focus:ring-blue-300 outline-none backdrop-blur-md"
               placeholder="Enter new password"
             />
           </div>
           <button
             type="submit"
-            className="w-full bg-green-600 hover:bg-green-700 text-white font-semibold py-2 rounded-md transition duration-300"
+            className="w-full bg-transparent text-white border border-white py-2 rounded-md transition duration-300 cursor-pointer hover:bg-blue-500 hover:border-blue-500"
           >
             Reset Password
           </button>

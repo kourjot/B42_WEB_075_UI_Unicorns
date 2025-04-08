@@ -35,6 +35,7 @@ const SignIn = () => {
   };
 
   return (
+    
     <div className="flex min-h-screen items-center justify-center bg-gray-100">
       <div className="flex w-full max-w-4xl rounded-lg bg-white shadow-lg">
         {/* Left Side - Form */}
@@ -114,6 +115,7 @@ const SignIn = () => {
           </Link>
         </p>
       </div>
+    </div>
     </div>
   );
 };
