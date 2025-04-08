@@ -6,10 +6,10 @@ const jwtKey = process.env.JWT_SECRET_KEY;
 const caloriesBrn = { running: 20, weightlifting: 7, yoga: 5, cardio: 15 };
 const daysOfWeek = ["sunday", "monday", "tuesday", "wednesday", "thursday", "friday", "saturday"];
 
-// const decodeToken = (token) => {
-//   if (!token) throw new Error("Authorization token is required");
-//   return jwt.verify(token, jwtKey);
-// };
+const decodeToken = (token) => {
+  if (!token) throw new Error("Authorization token is required");
+  return jwt.verify(token, jwtKey);
+};
 
 const workoutUpdate = async (req, res) => {
   const token = req.headers["authorization"];
